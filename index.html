@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Sending forms with pure AJAX &ndash; MDN</title>
+    <script  src="AJAXSubmit.js"></script>
+</head>
+<body>
+
+<h1>Sending forms with pure AJAX</h1>
+
+<h2>Using the GET method</h2>
+
+<form action="/postData" method="get">
+    <fieldset>
+        <legend>Registration example</legend>
+        <p>
+            First name: <input type="text" name="firstname" /><br />
+            Last name: <input type="text" name="lastname" />
+        </p>
+        <p>hobby:
+            <input type="checkbox" name="hobby" value="1">
+            <input type="checkbox" name="hobby" value="2">
+            <input type="checkbox" name="hobby" value="3">
+            <input type="checkbox" name="hobby" value="4">
+        </p>
+        <p>
+            <input class="submit" type="button" value="Submit" />
+        </p>
+    </fieldset>
+</form>
+
+<h2>Using the POST method</h2>
+<h3>Enctype: application/x-www-form-urlencoded (default)</h3>
+
+<form action="/postData" method="post">
+    <fieldset>
+        <legend>Registration example</legend>
+        <p>
+            First name: <input type="text" name="firstname" /><br />
+            Last name: <input type="text" name="lastname" />
+        </p>
+        <p>hobby:
+            <input type="checkbox" name="hobby" value="1">
+            <input type="checkbox" name="hobby" value="2">
+            <input type="checkbox" name="hobby" value="3">
+            <input type="checkbox" name="hobby" value="4">
+        </p>
+        <p>
+            <input class="submit" type="button" value="Submit" />
+        </p>
+    </fieldset>
+</form>
+
+<h3>Enctype: text/plain</h3>
+
+<h3>Enctype: multipart/form-data</h3>
+
+<form  method="post" enctype="application\/x-www-form-urlencoded">
+    <fieldset>
+        <legend>Upload example</legend>
+        <p>
+            First name: <input type="text" name="firstname" /><br />
+            Last name: <input type="text" name="lastname" /><br />
+            Sex:
+            <input id="sex_male" type="radio" name="sex" value="male" /> <label for="sex_male">Male</label>
+            <input id="sex_female" type="radio" name="sex" value="female" /> <label for="sex_female">Female</label><br />
+            Password: <input type="password" name="secret" /><br />
+            What do you prefer:
+            <select name="image_type">
+                <option>Books</option>
+                <option>Cinema</option>
+                <option>TV</option>
+            </select>
+        </p>
+        <p>
+            Post your photos:
+            <input type="file" multiple name="photos">
+        </p>
+        <p>hobby:
+            <input type="checkbox" name="hobby" value="1">
+            <input type="checkbox" name="hobby" value="2">
+            <input type="checkbox" name="hobby" value="3">
+            <input type="checkbox" name="hobby" value="4">
+        </p>
+        <p>
+            <input id="vehicle_bike" type="checkbox" name="vehicle" value="Bike" /> <label for="vehicle_bike">I have a bike</label><br />
+            <input id="vehicle_car" type="checkbox" name="vehicle" value="Car" /> <label for="vehicle_car">I have a car</label>
+        </p>
+        <p>
+            Describe yourself:<br />
+            <textarea name="description" cols="50" rows="8"></textarea>
+        </p>
+        <p>
+            <input class="submit" type="button" value="Submit" />
+        </p>
+    </fieldset>
+</form>
+<script>
+    Array.prototype.forEach.call(document.querySelectorAll("form"),function(form){
+        form.addEventListener("submit",function(event){
+            event.preventDefault();
+        });
+        form.querySelector(".submit").addEventListener("click",function(){
+            AJAXSubmit(form,{
+                datas:{id:"123",name:"liyonglei"},
+                enctype:"multipart/form-data",
+                method:"post",
+                url:"/postData",
+                success:function(){
+                    console.log(this);
+                }
+            });
+        })
+    });
+</script>
+</body>
+</html>
